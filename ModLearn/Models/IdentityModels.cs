@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -17,6 +18,8 @@ namespace ModLearn.Models
         Task<List<Team>> getAllTeamsAsync();
 
         Task<List<Player>> getAllPlayersAsync();
+
+        Task<Team> GetTeamByNameAsync(String Name);
 
     }
 
@@ -91,6 +94,11 @@ namespace ModLearn.Models
         public void SaveChanges()
         {
             db.SaveChanges();
+        }
+
+        public async Task<Team> GetTeamByNameAsync(string Name)
+        {
+            return await context.Teams.Include(t => t.Players).Where(t => t.Name == Name).FirstOrDefaultAsync();
         }
     }
 }

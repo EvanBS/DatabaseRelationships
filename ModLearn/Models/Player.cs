@@ -16,8 +16,9 @@ namespace ModLearn.Models
         public string Position { get; set; }
 
 
+        // навигационное свойство, для вытягивания Team из запроса
         public int? TeamId { get; set; }
-        // навигационное свойство, для вытягивания команды из запроса
+
         public Team Team { get; set; }
     }
 }
