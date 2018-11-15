@@ -17,7 +17,8 @@ namespace ModLearn
     {
         protected void Application_Start()
         {
-            
+            Database.SetInitializer<ApplicationDbContext>(new AppDbInitializer());
+
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
