@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModLearn.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,28 @@ namespace ModLearn.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        IRepository repository;
+
+        public HomeController(IRepository repository)
         {
-            return View();
+            this.repository = repository;
         }
+
+        public async System.Threading.Tasks.Task<ActionResult> Index()
+        {
+            List<Team> teams = await repository.getAllTeamsAsync();
+
+
+            return View(teams);
+        }
+
+        public async System.Threading.Tasks.Task<ActionResult> Players()
+        {
+            IEnumerable<Player> players = await repository.getAllPlayersAsync();
+
+            return View(players);
+        }
+
 
 
     }

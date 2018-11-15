@@ -8,9 +8,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ModLearn.Models
 {
-    interface IRepository
+    public interface IRepository
     {
         void SaveChanges();
+
+        ApplicationDbContext context { get; set; }
+
+        Task<List<Team>> getAllTeamsAsync();
+
+        Task<List<Player>> getAllPlayersAsync();
+
     }
 
     public class ApplicationUser : IdentityUser
@@ -50,6 +57,16 @@ namespace ModLearn.Models
         {
             get { return db; }
             set { db = value; }
+        }
+
+        public async Task<List<Team>> getAllTeamsAsync()
+        {
+            return await context.Teams.Include(t => t.Players).ToListAsync();
+        }
+
+        public async Task<List<Player>> getAllPlayersAsync()
+        {
+            return await context.Players.Include(p => p.Team).ToListAsync();
         }
 
 

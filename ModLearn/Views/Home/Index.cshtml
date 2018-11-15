@@ -1,5 +1,17 @@
-﻿@{
+﻿@model IEnumerable<ModLearn.Models.Team>
+@{
     ViewBag.Title = "Home Page";
 }
 
-zdarova
+@foreach (var team in Model)
+{
+    @team.Name
+
+    <ul>
+
+        @foreach(var player in team.Players.ToList())
+        {
+        <li>@player.Name</li>
+        }
+    </ul>
+}
