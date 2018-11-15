@@ -33,14 +33,14 @@ namespace ModLearn.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> TeamOf(string Name)
+        public async Task<ActionResult> TeamOf(string id)
         {
-            if (String.IsNullOrEmpty(Name))
+            if (String.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index");
             }
 
-            Team team = await repository.GetTeamByNameAsync(Name) ?? new Team();
+            Team team = await repository.GetTeamByNameAsync(id) ?? new Team();
 
             return View(team);
         }
