@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace ModLearn.Models
 {
@@ -34,6 +31,5 @@ namespace ModLearn.Models
             context.SaveChanges();
             base.Seed(context);
         }
-
     }
 }

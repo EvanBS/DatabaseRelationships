@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ModLearn.Models
 {
@@ -21,13 +21,13 @@ namespace ModLearn.Models
 
         Task<Team> GetTeamByNameAsync(String Name);
 
+        void AddPlayer(Player player);
     }
 
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-    
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
 
             return userIdentity;
@@ -51,7 +51,6 @@ namespace ModLearn.Models
         }
     }
 
-
     public class TeamRepository : IRepository, IDisposable
     {
         public ApplicationDbContext db;
@@ -72,8 +71,6 @@ namespace ModLearn.Models
             return await context.Players.Include(p => p.Team).ToListAsync();
         }
 
-
-
         protected void Dispose(bool disposing)
         {
             if (disposing)
@@ -85,6 +82,7 @@ namespace ModLearn.Models
                 }
             }
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -99,6 +97,11 @@ namespace ModLearn.Models
         public async Task<Team> GetTeamByNameAsync(string Name)
         {
             return await context.Teams.Include(t => t.Players).Where(t => t.Name == Name).FirstOrDefaultAsync();
+        }
+
+        public void AddPlayer(Player player)
+        {
+            context.Players.Add(player);
         }
     }
 }

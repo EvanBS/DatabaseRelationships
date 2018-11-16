@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ModLearn.Models
+﻿namespace ModLearn.Models
 {
     public class Player
     {
@@ -14,7 +9,6 @@ namespace ModLearn.Models
         public int Age { get; set; }
 
         public string Position { get; set; }
-
 
         // навигационное свойство, для вытягивания Team из запроса
         public int? TeamId { get; set; }

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.UI.WebControls;
 
 namespace ModLearn
 {
@@ -22,8 +17,8 @@ namespace ModLearn
 
             routes.MapRoute(
                 name: "FindName",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "FindOf", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{name}",
+                defaults: new { controller = "Home", action = "FindOf", name = UrlParameter.Optional }
             );
         }
     }

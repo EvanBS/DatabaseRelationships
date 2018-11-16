@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(ModLearn.Startup))]
+
 namespace ModLearn
 {
     public partial class Startup

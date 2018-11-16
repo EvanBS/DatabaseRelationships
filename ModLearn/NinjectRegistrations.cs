@@ -10,5 +10,4 @@ namespace ModLearn
             Bind<IRepository>().To<TeamRepository>().WithPropertyValue("context", new ApplicationDbContext());
         }
     }
-
 }

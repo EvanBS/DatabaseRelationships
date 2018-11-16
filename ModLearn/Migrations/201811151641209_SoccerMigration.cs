@@ -1,8 +1,7 @@
 namespace ModLearn.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class SoccerMigration : DbMigration
     {
         public override void Up()
@@ -10,29 +9,28 @@ namespace ModLearn.Migrations
             CreateTable(
                 "dbo.Players",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Age = c.Int(nullable: false),
-                        Position = c.String(),
-                        TeamId = c.Int(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Age = c.Int(nullable: false),
+                    Position = c.String(),
+                    TeamId = c.Int(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Teams", t => t.TeamId)
                 .Index(t => t.TeamId);
-            
+
             CreateTable(
                 "dbo.Teams",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Coach = c.String(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Name = c.String(),
+                    Coach = c.String(),
+                })
                 .PrimaryKey(t => t.Id);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.Players", "TeamId", "dbo.Teams");
